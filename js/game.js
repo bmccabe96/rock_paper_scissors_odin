@@ -33,11 +33,13 @@ function checkForWinner(playerCount, computerCount, div) {
     let h1 = document.createElement("h1");
     if (playerCount === 3) {
         h1.textContent = "You win the series!";
+        div.appendChild(h1);
     }
     if (computerCount === 3) {
-        h1.textContent = "You lose the series :(";            
+        h1.textContent = "You lose the series :(";  
+        div.appendChild(h1);          
     }
-    div.appendChild(h1);
+    
 }
 
 let playerCount = 0;
