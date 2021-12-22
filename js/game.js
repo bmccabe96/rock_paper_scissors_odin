@@ -29,26 +29,37 @@ function playSingleRound(playerSelection, computerSelection) {
 
 }
 
-function game() {
-    let playerCount = 0;
-    let computerCount = 0;
-    let playerSelection;
-    while (true) {
-        playerSelection = prompt("Rock, paper, or scissors: ");
-        let roundResult = playSingleRound(playerSelection, computerPlay());
-        console.log(roundResult);
-        playerCount += roundResult[0];
-        console.log(playerCount);
-        computerCount += roundResult[1];
-        console.log(computerCount);
-        console.log(roundResult[2]);
-        if (playerCount === 3) {
-            console.log("You win the series!");
-            break;
-        }
-        if (computerCount === 3) {
-            console.log("You lose the series :(");
-            break;
-        }
+function checkForWinner(playerCount, computerCount, div) {
+    let h1 = document.createElement("h1");
+    if (playerCount === 3) {
+        h1.textContent = "You win the series!";
     }
+    if (computerCount === 3) {
+        h1.textContent = "You lose the series :(";            
+    }
+    div.appendChild(h1);
 }
+
+let playerCount = 0;
+let computerCount = 0;
+let playerSelection;
+let roundResult;
+const div = document.querySelector("#results");
+const buttons = document.querySelectorAll('button');
+
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        roundResult = playSingleRound(button.name, computerPlay());
+        let p = document.createElement("p");
+        p.textContent = roundResult[2];
+        div.appendChild(p);
+        playerCount += roundResult[0];
+        computerCount += roundResult[1];
+        checkForWinner(playerCount, computerCount, div);
+    });
+});
+
+
+
+
+
